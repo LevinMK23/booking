@@ -1,16 +1,20 @@
 package com.acid.booking.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.acid.booking.model.User;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 public interface UserService {
 
-    User getUserById(int id);
+    Optional<User> findById(int id);
 
-    List<User> getUsersList();
+    Iterable<User> findAll();
 
-    void addNewUser(User user);
+    Optional<User> findByNameAndSurname(String name, String surname);
+
+    User save(User user);
 
 }

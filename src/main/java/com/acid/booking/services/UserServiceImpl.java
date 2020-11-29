@@ -1,32 +1,35 @@
 package com.acid.booking.services;
 
-import java.util.List;
-
 import com.acid.booking.model.User;
-import org.springframework.stereotype.Component;
+import com.acid.booking.repository.UsersRepository;
+import org.springframework.stereotype.Service;
 
-@Component
+import java.util.Optional;
+
+@Service
 public class UserServiceImpl implements UserService {
 
-    private final UserDao userDao;
+    private final UsersRepository repository;
 
-    public UserServiceImpl(UserDao userDao) {
-        this.userDao = userDao;
+    public UserServiceImpl(UsersRepository repository) {
+        this.repository = repository;
     }
 
+    public Optional<User> findById(int id) {
+        return repository.findById(id);
+    }
+
+    public Iterable<User> findAll() {
+        return repository.findAll();
+    }
+
+    public Optional<User> findByNameAndSurname(String name, String surname) {
+        return repository.findUserByNameAndSurname(name, surname);
+    }
 
     @Override
-    public User getUserById(int id) {
-        return userDao.getUserById(id);
+    public User save(User user) {
+        return repository.save(user);
     }
 
-    @Override
-    public List<User> getUsersList() {
-        return userDao.getUsersList();
-    }
-
-    @Override
-    public void addNewUser(User user) {
-        userDao.addNewUser(user);
-    }
 }

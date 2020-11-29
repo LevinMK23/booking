@@ -12,6 +12,7 @@ public class AppWebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .anyRequest().permitAll();
+                .anyRequest()
+                .permitAll();
     }
 }
